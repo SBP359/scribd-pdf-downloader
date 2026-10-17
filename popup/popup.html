@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scribd Downloader</title>
+  <link rel="stylesheet" href="popup.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="card">
+    <!-- Header Section -->
+    <div class="header">
+      <div class="logo-container">
+        <img class="logo" src="../icons/icon48.png" alt="Scribd Downloader Logo">
+      </div>
+      <div class="title-container">
+        <div class="title-row">
+          <h1>Scribd Downloader</h1>
+          <span class="version-badge" id="app-version">v1.0.0</span>
+        </div>
+        <p class="subtitle">Free, unlimited document-to-PDF downloads</p>
+      </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="content">
+      <!-- 1. Domain Warning State (Displayed when not on scribd.com) -->
+      <div class="domain-warning-box hidden" id="domain-warning-box">
+        <div class="warning-icon-wrapper">
+          <svg class="warning-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+          </svg>
+        </div>
+        <div class="warning-text-container">
+          <span class="warning-badge" id="current-domain-badge">Unsupported website</span>
+          <h2 class="warning-title">Open a Scribd document</h2>
+          <p class="warning-desc">To prepare a PDF, open a document page on Scribd and try again.
+          </p>
+        </div>
+        <button class="action-btn navigate-btn" id="open-scribd-btn">
+          <span>Go to Scribd.com</span>
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+            <polyline points="15 3 21 3 21 9"></polyline>
+            <line x1="10" y1="14" x2="21" y2="3"></line>
+          </svg>
+        </button>
+      </div>
+
+      <!-- 2. Download Controls (Displayed when on scribd.com) -->
+      <div class="download-controls" id="download-controls">
+        <!-- Status Display -->
+        <div class="status-box">
+          <div class="status-indicator">
+            <span class="pulse-dot idle" id="pulse-dot"></span>
+            <span class="status-text" id="status-text">Ready when you are</span>
+          </div>
+          <p class="status-detail" id="status-detail">Choose a document on Scribd, then start preparing your PDF.</p>
+        </div>
+
+        <!-- Progress Container (Hidden initially) -->
+        <div class="progress-container hidden" id="progress-container">
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" id="progress-bar-fill"></div>
+          </div>
+          <div class="progress-labels">
+            <span id="progress-percent">0%</span>
+            <span id="progress-count">0 / 0 pages</span>
+          </div>
+        </div>
+
+        <!-- Settings Section -->
+        <div class="settings-box">
+          <div class="setting-row">
+            <label for="delay-range">Page load delay</label>
+            <span class="delay-value" id="delay-value">150ms</span>
+          </div>
+          <input type="range" id="delay-range" min="50" max="500" step="50" value="150">
+          <p class="setting-desc">Increase the delay if pages load slowly or appear incomplete.</p>
+        </div>
+
+        <!-- Action Button -->
+        <button class="action-btn" id="start-btn">
+          <span class="btn-text">Prepare PDF</span>
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="7 10 12 15 17 10" />
+            <line x1="12" y1="15" x2="12" y2="3" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Redesigned Footer matching user screenshot -->
+    <footer class="footer">
+      <div class="footer-actions">
+        <!-- 1. Project Repository -->
+        <a href="https://github.com/sbp359/scribd-pdf-downloader" target="_blank" rel="noopener noreferrer"
+          class="footer-item footer-link" id="btn-rate" title="Project Repository">
+          <div class="footer-icon-wrapper">
+            <svg class="footer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <polygon
+                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+              </polygon>
+            </svg>
+          </div>
+          <span class="footer-label">Project<br>Repository</span>
+        </a>
+
+        <!-- 2. Report / Feedback -->
+        <a href="https://github.com/sbp359/scribd-pdf-downloader/issues"
+          target="_blank" rel="noopener noreferrer" class="footer-item footer-link" id="btn-feedback"
+          title="Report / Feedback">
+          <div class="footer-icon-wrapper">
+            <svg class="footer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+          </div>
+          <span class="footer-label">GitHub<br>Issues</span>
+        </a>
+
+        <!-- 3. GitHub Profile -->
+        <a href="https://github.com/sbp359" target="_blank" rel="noopener noreferrer"
+          class="footer-item footer-link" id="btn-tools" title="GitHub Profile">
+          <div class="footer-icon-wrapper">
+            <svg class="footer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+              <polyline points="15 3 21 3 21 9"></polyline>
+              <line x1="10" y1="14" x2="21" y2="3"></line>
+            </svg>
+          </div>
+          <span class="footer-label">GitHub<br>Profile</span>
+        </a>
+      </div>
+
+      <!-- Attribution Signature -->
+      <div class="footer-signature">
+        <span>Made with <span class="heart-icon">❤️</span> by <a href="https://github.com/sbp359" target="_blank"
+            rel="noopener noreferrer" class="author-name footer-link">sbp359</a></span>
+      </div>
+    </footer>
+  </div>
+  <script src="../constants.js"></script>
+  <script src="../tracker.js"></script>
+  <script src="popup.js"></script>
+</body>
+
+</html>
