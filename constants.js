@@ -7,7 +7,7 @@
 
 const APP_CONFIG = {
   // 0. Extension Version
-  VERSION: "1.0.0",
+  VERSION: "1.0.1",
 
   // 1. Download processing
   DEFAULT_SCROLL_DELAY_MS: 150,   // Default delay between page scrolls (ms)

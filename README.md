@@ -16,30 +16,26 @@ The extension does not provide access to restricted documents or bypass Scribd's
 
 This is a Manifest V3 extension for Chromium browsers and Firefox-based browsers with Firefox 140 or later, including compatible versions of Zen Browser.
 
+### Firefox and Zen Browser
+
+Install the published add-on from [Mozilla Add-ons](https://addons.mozilla.org/addon/scribd-downloader/).
+
 ### Chrome, Edge, and other Chromium browsers
+
+The Chrome Web Store version is **not published yet**. To install the current version manually:
 
 1. Download or clone this repository.
 2. Open your browser's extensions page (`chrome://extensions` in Chrome or `edge://extensions` in Edge).
 3. Turn on **Developer mode**.
-4. Select **Load unpacked** and choose this repository's folder—the one containing `manifest.json`.
-5. Open a Scribd document page you can access.
+4. Select **Load unpacked** and choose the repository folder containing `manifest.json`.
 
-### Firefox and Zen Browser
-
-For local testing, build the Firefox-compatible package from the repository root in PowerShell:
+For local testing in Firefox or Zen, build the temporary package from the repository root in PowerShell:
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\package-firefox.ps1
 ```
 
-This creates `dist/scribd-downloader-zen.xpi`. In Zen:
-
-1. Open `about:debugging#/runtime/this-firefox`.
-2. Select **Load Temporary Add-on…**.
-3. Select `scribd-downloader-zen.xpi`.
-4. Open a Scribd document page you can access.
-
-Temporary add-ons are removed when Zen closes. For regular installation, submit the XPI to Mozilla Add-ons (AMO) for review and signing.
+Then open `about:debugging#/runtime/this-firefox`, select **Load Temporary Add-on…**, and choose `dist/scribd-downloader-zen.xpi`. Temporary add-ons are removed when the browser closes.
 
 ## Use
 
