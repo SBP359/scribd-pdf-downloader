@@ -14,13 +14,32 @@ The extension does not provide access to restricted documents or bypass Scribd's
 
 ## Install
 
-This is a Chromium Manifest V3 extension. To load it from source:
+This is a Manifest V3 extension for Chromium browsers and Firefox-based browsers with Firefox 140 or later, including compatible versions of Zen Browser.
+
+### Chrome, Edge, and other Chromium browsers
 
 1. Download or clone this repository.
 2. Open your browser's extensions page (`chrome://extensions` in Chrome or `edge://extensions` in Edge).
 3. Turn on **Developer mode**.
 4. Select **Load unpacked** and choose this repository's folder—the one containing `manifest.json`.
 5. Open a Scribd document page you can access.
+
+### Firefox and Zen Browser
+
+For local testing, build the Firefox-compatible package from the repository root in PowerShell:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\package-firefox.ps1
+```
+
+This creates `dist/scribd-downloader-zen.xpi`. In Zen:
+
+1. Open `about:debugging#/runtime/this-firefox`.
+2. Select **Load Temporary Add-on…**.
+3. Select `scribd-downloader-zen.xpi`.
+4. Open a Scribd document page you can access.
+
+Temporary add-ons are removed when Zen closes. For regular installation, submit the XPI to Mozilla Add-ons (AMO) for review and signing.
 
 ## Use
 
@@ -32,9 +51,7 @@ If the PDF has missing or blank pages, open the popup and increase **Page load d
 
 ## Privacy and permissions
 
-The extension needs access to Scribd pages to add its button and prepare the document. It uses browser tab APIs to identify and navigate the active page, and local storage for a pseudonymous telemetry ID.
-
-Usage telemetry is sent to `anytools.online`. It can include a pseudonymous installation ID, browser and extension version, event details, and document titles or URLs. The extension does not send document page contents or generated PDFs. Telemetry errors are logged locally; telemetry is not currently configurable from the popup.
+The extension accesses Scribd pages to add its button and prepare documents, and uses browser tab APIs for popup navigation. Document preparation and printing run locally in your browser. The extension does not send usage telemetry or upload document contents or generated PDFs.
 
 ## Development
 

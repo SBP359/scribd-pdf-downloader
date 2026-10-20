@@ -1,29 +1,56 @@
 {
-   "action": {
-      "default_icon": {
-         "128": "icons/icon128.png",
-         "16": "icons/icon16.png",
-         "48": "icons/icon48.png"
-      },
-      "default_popup": "popup/popup.html"
-   },
-   "author": "sbp359",
-   "content_scripts": [ {
-      "js": [ "constants.js", "tracker.js", "content.js" ],
-      "matches": [ "https://*.scribd.com/document/*", "https://*.scribd.com/doc/*", "https://*.scribd.com/embeds/*", "https://*.scribd.com/embed/*" ],
-      "run_at": "document_end"
-   } ],
-   "description": "Prepare Scribd documents you can access for saving as PDFs.",
-   "host_permissions": [ "https://*.scribd.com/*", "https://*.anytools.online/*", "https://anytools.online/*", "http://localhost:3000/*" ],
-   "icons": {
+  "action": {
+    "default_icon": {
       "128": "icons/icon128.png",
       "16": "icons/icon16.png",
       "48": "icons/icon48.png"
-   },
-   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApsmx024bKFU08Y/ZcbVbP22OPLQ47IPwpxjamgOneCcl2kbdJ77K1+FFpeP6JP2L5o0QP5ZOmge1OZx/GsSzELeOCGI9tAOYR+h+rSFOwiPIbCy9IhqZBb30OQ705y+8GClGnrzutpq12GArnwfDm6CbQqqrowsqWqMkMt38SIqoW35DZ5M/0BmDEi2G/1SPwjl3R/w4MD0rSlZyXzweLtu9bda6S9UdwW3Dkytltw2JlkaINg7SKHwqvvo0n8kcE2KaMT/JR8731WXw8VRhWcqE6bC/+fsP2mUHmz453jvZIGdreXuXVucszJIXoBxHpEF8UW6VieTnNz3EHej6gQIDAQAB",
-   "manifest_version": 3,
-   "name": "Scribd Downloader",
-   "permissions": [ "activeTab", "tabs", "scripting", "storage" ],
-   "update_url": "https://clients2.google.com/service/update2/crx",
-   "version": "1.0.0"
+    },
+    "default_popup": "popup/popup.html"
+  },
+  "author": "sbp359",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "scribd-pdf-downloader@sbp359.github.io",
+      "strict_min_version": "140.0",
+      "data_collection_permissions": {
+        "required": [
+          "none"
+        ]
+      }
+    }
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "constants.js",
+        "content.js"
+      ],
+      "matches": [
+        "https://*.scribd.com/document/*",
+        "https://*.scribd.com/doc/*",
+        "https://*.scribd.com/embeds/*",
+        "https://*.scribd.com/embed/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "description": "Prepare Scribd documents you can access for saving as PDFs.",
+  "host_permissions": [
+    "https://*.scribd.com/*"
+  ],
+  "icons": {
+    "128": "icons/icon128.png",
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png"
+  },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApsmx024bKFU08Y/ZcbVbP22OPLQ47IPwpxjamgOneCcl2kbdJ77K1+FFpeP6JP2L5o0QP5ZOmge1OZx/GsSzELeOCGI9tAOYR+h+rSFOwiPIbCy9IhqZBb30OQ705y+8GClGnrzutpq12GArnwfDm6CbQqqrowsqWqMkMt38SIqoW35DZ5M/0BmDEi2G/1SPwjl3R/w4MD0rSlZyXzweLtu9bda6S9UdwW3Dkytltw2JlkaINg7SKHwqvvo0n8kcE2KaMT/JR8731WXw8VRhWcqE6bC/+fsP2mUHmz453jvZIGdreXuXVucszJIXoBxHpEF8UW6VieTnNz3EHej6gQIDAQAB",
+  "manifest_version": 3,
+  "name": "Scribd Downloader",
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "scripting"
+  ],
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "version": "1.0.0"
 }

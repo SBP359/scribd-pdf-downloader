@@ -46,14 +46,6 @@ function createWebsiteDownloadButton() {
       return;
     }
 
-    if (typeof ExtensionTracker !== "undefined") {
-      ExtensionTracker.track("DOWNLOAD_INITIATED_FROM_WEBSITE", {
-        mode: "free",
-        docUrl: currentUrl,
-        docTitle: document.title,
-      });
-    }
-
     const delay = (typeof APP_CONFIG !== "undefined" && APP_CONFIG.DEFAULT_SCROLL_DELAY_MS) || 150;
     const embedUrl = new URL(`/embeds/${currentDocumentId}/content`, window.location.origin);
     embedUrl.searchParams.set("start_download", "true");
@@ -113,15 +105,6 @@ async function runDownloader(scrollDelayMs) {
   try {
     isCancelled = false;
 
-    if (typeof ExtensionTracker !== "undefined") {
-      ExtensionTracker.track("DOWNLOAD_STARTED", {
-        mode: "free",
-        scrollDelayMs,
-        docTitle: document.title,
-      });
-    }
-
-
     // Show visual status overlay in the page
     updateOverlay("Getting things ready...", "Connecting to the Scribd document.", 0, 100, false);
 
@@ -169,13 +152,6 @@ async function proceedToPrint(paperSize) {
 
     restorePage();
     safeSendMessage({ action: "PROGRESS", status: "completed" });
-    if (typeof ExtensionTracker !== "undefined") {
-      ExtensionTracker.track("DOWNLOAD_SUCCESS", {
-        downloadType: "free",
-        docTitle: document.title,
-      });
-    }
-
     const urlParams = new URLSearchParams(window.location.search);
     const originalUrl = urlParams.get("original_url");
     if (originalUrl) {
@@ -555,11 +531,6 @@ function createOverlay() {
       cancelScanBtn.style.borderColor = "#dce9df";
     };
     cancelScanBtn.onclick = () => {
-      if (typeof ExtensionTracker !== "undefined") {
-        ExtensionTracker.track("DOWNLOAD_SCAN_CANCELLED", {
-          docTitle: document.title,
-        });
-      }
       isCancelled = true;
       removeOverlay();
       restorePage();
@@ -597,12 +568,6 @@ function updateOverlay(status, detail, current, total, showPageCount = true) {
 }
 
 function showOverlayError(errMessage) {
-  if (typeof ExtensionTracker !== "undefined") {
-    ExtensionTracker.track("DOWNLOAD_FAILED", {
-      errorMessage: errMessage || "Something went wrong while preparing the PDF.",
-      docTitle: document.title,
-    });
-  }
   createOverlay();
   const statusEl = document.getElementById('sd-overlay-status');
   const detailEl = document.getElementById('sd-overlay-detail');

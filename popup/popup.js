@@ -48,14 +48,6 @@ document.addEventListener("DOMContentLoaded", () => {
   delayRange.addEventListener("input", (e) => {
     delayValue.innerText = `${e.target.value}ms`;
   });
-  delayRange.addEventListener("change", (e) => {
-    if (typeof ExtensionTracker !== "undefined") {
-      ExtensionTracker.track("SETTING_SCROLL_DELAY_CHANGED", {
-        scrollDelayMs: parseInt(e.target.value, 10),
-      });
-    }
-  });
-
   // 2. Check if active tab is on Scribd domain and document page
   if (typeof chrome !== "undefined" && chrome.tabs && chrome.tabs.query) {
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
@@ -67,14 +59,6 @@ document.addEventListener("DOMContentLoaded", () => {
       const hostname = getHostname(url);
       const isScribd = isScribdDomain(url);
       const isDoc = isScribdDocument(url);
-
-      if (typeof ExtensionTracker !== "undefined") {
-        ExtensionTracker.track("POPUP_OPENED", {
-          hostname,
-          isScribdDomain: isScribd,
-          isScribdDocument: isDoc,
-        });
-      }
 
       if (!isScribd) {
         // Current domain does NOT match Scribd -> show dedicated navigation UI
@@ -116,9 +100,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // 3. Handle navigation to Scribd when user is on unsupported domain
   if (openScribdBtn) {
     openScribdBtn.addEventListener("click", () => {
-      if (typeof ExtensionTracker !== "undefined") {
-        ExtensionTracker.track("NAVIGATE_SCRIBD_CLICKED");
-      }
       const targetUrl = "https://www.scribd.com";
       if (typeof chrome !== "undefined" && chrome.tabs) {
         if (activeTabId) {
@@ -148,15 +129,6 @@ document.addEventListener("DOMContentLoaded", () => {
       const tabId = tab.id;
       const url = tab.url || "";
       const match = url.match(/https?:\/\/(?:[^/]+\.)?scribd\.com\/(?:document|doc)\/(\d+)/);
-
-      if (typeof ExtensionTracker !== "undefined") {
-        ExtensionTracker.track("DOWNLOAD_INITIATED_FROM_POPUP", {
-          mode: "free",
-          scrollDelay: parseInt(delayRange.value, 10),
-          docUrl: url,
-          docTitle: tab.title || "",
-        });
-      }
 
       if (match) {
         // Redirect to embed view and start the free download automatically.
@@ -315,17 +287,4 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Track footer links
-  ["btn-rate", "btn-feedback", "btn-tools"].forEach((id) => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.addEventListener("click", () => {
-        if (typeof ExtensionTracker !== "undefined") {
-          ExtensionTracker.track("FOOTER_LINK_CLICKED", {
-            target: id.replace("btn-", ""),
-          });
-        }
-      });
-    }
-  });
 });
