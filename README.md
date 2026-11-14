@@ -33,13 +33,13 @@ The Chrome Web Store version is **not published yet**. To install the current ve
 3. Turn on **Developer mode**.
 4. Select **Load unpacked** and choose the repository folder containing `manifest.json`.
 
-For local testing in Firefox or Zen, build the temporary package from the repository root in PowerShell:
+For local testing in Firefox-based browsers, build the temporary package from the repository root in PowerShell:
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\package-firefox.ps1
 ```
 
-Then open `about:debugging#/runtime/this-firefox`, select **Load Temporary Add-on…**, and choose `dist/scribd-downloader-zen.xpi`. Temporary add-ons are removed when the browser closes.
+Then open `about:debugging#/runtime/this-firefox`, select **Load Temporary Add-on…**, and choose `dist/scribd-downloader-firefox.xpi`. Temporary add-ons are removed when the browser closes.
 
 ## Use
 

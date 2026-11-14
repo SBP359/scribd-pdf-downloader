@@ -3,7 +3,7 @@ $ErrorActionPreference = "Stop"
 $root = Split-Path -Parent $PSScriptRoot
 $dist = Join-Path $root "dist"
 $stage = Join-Path ([System.IO.Path]::GetTempPath()) ("scribd-downloader-firefox-" + [guid]::NewGuid().ToString("N"))
-$xpiPath = Join-Path $dist "scribd-downloader-zen.xpi"
+$xpiPath = Join-Path $dist "scribd-downloader-firefox.xpi"
 
 New-Item -ItemType Directory -Path $dist -Force | Out-Null
 New-Item -ItemType Directory -Path $stage | Out-Null
