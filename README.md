@@ -1,11 +1,11 @@
 <p align="center">
-  <img src="assets/logo.png" alt="Scribd Downloader logo" width="128">
+  <img src="assets/logo.png" alt="Scribd & SlideShare Downloader logo" width="128">
 </p>
 
-<h1 align="center">Scribd Downloader</h1>
+<h1 align="center">Scribd & SlideShare Downloader</h1>
 
 <p align="center">
-  <strong>Prepare accessible Scribd documents for PDF export directly in your browser.</strong>
+  <strong>Prepare accessible Scribd documents and SlideShare presentations for PDF export directly in your browser.</strong>
 </p>
 
 <p align="center">
@@ -29,15 +29,16 @@
 </p>
 
 > [!IMPORTANT]
-> Scribd Downloader only prepares documents you already have permission to access. It does not bypass Scribd login, subscriptions, paywalls, or any other access controls.
+> This extension prepares content that you already have permission to access. It does not bypass Scribd or SlideShare authentication, subscriptions, paywalls, or any other access controls.
 
 ## Features
 
-- **One-click preparation** — Start directly from the Scribd document toolbar or extension popup.
-- **Lazy-page loading** — Scrolls through the document so rendered pages can finish loading.
-- **Adjustable delay** — Tune page loading from 50 ms to 500 ms for slower connections.
-- **Print-to-PDF workflow** — Uses the browser's familiar print dialog and **Save as PDF** destination.
-- **Local processing** — Document preparation and printing happen in your browser.
+- **Scribd support** — Loads accessible Scribd documents, scrolls through their pages, and opens the print dialog.
+- **SlideShare support** — Discovers presentation slides and preloads high-resolution slide images.
+- **One-click preparation** — Start from the supported website toolbar or the extension popup.
+- **Adjustable loading** — Tune page or slide loading from 50 ms to 500 ms for slower connections.
+- **Print-to-PDF workflow** — Uses the browser print dialog and **Save as PDF** destination.
+- **Local processing** — Document and presentation preparation happen in your browser.
 - **Cross-browser manifest** — Supports Firefox 140+ and Chromium-based browsers.
 - **No build step** — Built with plain JavaScript, HTML, and CSS.
 
@@ -77,11 +78,18 @@ Temporary add-ons are removed when the browser closes or restarts.
 
 ## Usage
 
-1. Open a Scribd document you can access.
-2. Click **Download RN** in the document toolbar.
+### Scribd
 
-   Alternatively, open the extension popup and select **Prepare PDF**.
-3. Wait while the extension loads and scans the document pages.
+1. Open a Scribd document at `scribd.com/document/...`, `scribd.com/doc/...`, or a Scribd embed page.
+2. Click **Download RN** in the document toolbar, or open the extension popup and select **Prepare PDF**.
+3. Wait while the pages load.
+4. In the print dialog, choose **Save as PDF** and save the file.
+
+### SlideShare
+
+1. Open a presentation on `slideshare.net`.
+2. Click **Download RN** beside the presentation metadata, or open the extension popup and select **Prepare PDF**.
+3. Wait while the slides are discovered and high-resolution images are preloaded.
 4. In the print dialog, choose **Save as PDF** and save the file.
 
 ### Improve missing or blank pages
@@ -90,24 +98,24 @@ Open the extension popup and increase **Page load delay**. The default is 150 ms
 
 - Use a higher delay for slower pages or unreliable connections.
 - Use a lower delay for fast, fully loaded documents.
-- Reload the document if a result is incomplete, then try again.
+- Reload the document or presentation if a result is incomplete, then try again.
 
 ## Privacy
 
-- Scribd pages are processed locally in the browser.
-- The extension does not upload document page contents or generated PDFs.
+- Scribd and SlideShare pages are processed locally in the browser.
+- The extension does not upload document or slide contents or generated PDFs.
 - The extension does not send usage telemetry.
 - No credentials or subscription information are collected.
 
-The extension requests only the permissions needed for document preparation:
+The extension requests only the permissions needed for preparation:
 
 | Permission | Purpose |
 | --- | --- |
-| `activeTab` | Interact with the current Scribd tab |
+| `activeTab` | Interact with the current Scribd or SlideShare tab |
 | `tabs` | Detect the active page and support popup navigation |
 | `scripting` | Load the content script when needed |
 
-Host access is limited to `*.scribd.com`.
+Host access is limited to `*.scribd.com` and `*.slideshare.net`.
 
 ## Project structure
 
@@ -115,7 +123,7 @@ Host access is limited to `*.scribd.com`.
 .
 ├── assets/logo.png     # Project logo
 ├── constants.js        # Shared configuration
-├── content.js          # Document loading and print preparation
+├── content.js          # Scribd and SlideShare loading and print preparation
 ├── manifest.json       # Browser extension configuration
 ├── icons/              # Extension icons
 ├── popup/
@@ -135,7 +143,7 @@ No package installation or build step is required for source changes.
 1. Clone or download the repository.
 2. Make changes to the HTML, CSS, JavaScript, or manifest files.
 3. Reload the unpacked extension in your browser.
-4. Test using an accessible Scribd document.
+4. Test with an accessible Scribd document and SlideShare presentation.
 
 For Firefox packaging:
 
@@ -145,19 +153,19 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\package-firefox.ps
 
 ## Troubleshooting
 
-**Missing or blank pages**
+**Missing or blank pages or slides**
 
 - Increase **Page load delay** in the popup.
-- Reload the document and repeat the preparation.
+- Reload the document or presentation and repeat the preparation.
 
 **Refresh required**
 
-- Reload the active Scribd tab.
+- Reload the active Scribd or SlideShare tab.
 - Reopen the popup and select **Prepare PDF** again.
 
 **Unsupported page**
 
-- Open a Scribd document, embed, or accessible document page rather than a search or account page.
+- Open a Scribd document or SlideShare presentation rather than a search, account, category, or login page.
 
 ## Contributing
 
@@ -165,12 +173,12 @@ Contributions are welcome.
 
 1. Fork the repository.
 2. Create a focused feature or bug-fix branch.
-3. Test with Chrome, Edge, or Firefox where applicable.
+3. Test with Chromium browsers and Firefox where applicable.
 4. Open a pull request with clear testing steps.
 
 ## Support
 
-If Scribd Downloader has been useful, you can support development on Ko-fi:
+If this extension is useful, you can support development on Ko-fi:
 
 [![Ko-fi](https://img.shields.io/badge/Ko--fi-Support%20me-FF5E5B?logo=ko-fi&logoColor=white)](https://ko-fi.com/sbp359)
 

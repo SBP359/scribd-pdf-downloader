@@ -123,7 +123,7 @@ body {
   gap: 12px;
 }
 
-/* Domain Warning Box (When not on scribd.com) */
+/* Domain Warning Box (When not on scribd.com or slideshare.net) */
 .domain-warning-box {
   background: var(--bg-card);
   border: 1px solid var(--border-color);
@@ -191,8 +191,29 @@ body {
   max-width: 260px;
 }
 
+.navigate-btn-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  width: 100%;
+}
+
 .navigate-btn {
   width: 100%;
+  padding: 10px 10px;
+  font-size: 12.5px;
+}
+
+.navigate-btn-secondary {
+  background: var(--primary-light);
+  color: var(--primary);
+  border: 1px solid var(--primary-border);
+  box-shadow: none;
+}
+
+.navigate-btn-secondary:hover {
+  background: #dcf2e4;
+  box-shadow: 0 4px 12px rgba(22, 131, 74, 0.14);
 }
 
 /* Download Controls Container */
@@ -438,7 +459,7 @@ input[type="range"]:focus-visible {
 }
 
 /* ============================================================
-   Footer Section (Matching User Image)
+   Footer Section
    ============================================================ */
 .footer {
   border-top: 1px solid var(--border-subtle);

@@ -1,13 +1,24 @@
 {
+  "manifest_version": 3,
+  "name": "Scribd & SlideShare Downloader",
+  "version": "1.1.0",
+  "description": "Prepare Scribd documents and SlideShare presentations you can access for saving as PDFs.",
+  "author": "sbp359",
   "action": {
     "default_icon": {
-      "128": "icons/icon128.png",
       "16": "icons/icon16.png",
-      "48": "icons/icon48.png"
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
     },
     "default_popup": "popup/popup.html"
   },
-  "author": "sbp359",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApsmx024bKFU08Y/ZcbVbP22OPLQ47IPwpxjamgOneCcl2kbdJ77K1+FFpeP6JP2L5o0QP5ZOmge1OZx/GsSzELeOCGI9tAOYR+h+rSFOwiPIbCy9IhqZBb30OQ705y+8GClGnrzutpq12GArnwfDm6CbQqqrowsqWqMkMt38SIqoW35DZ5M/0BmDEi2G/1SPwjl3R/w4MD0rSlZyXzweLtu9bda6S9UdwW3Dkytltw2JlkaINg7SKHwqvvo0n8kcE2KaMT/JR8731WXw8VRhWcqE6bC/+fsP2mUHmz453jvZIGdreXuXVucszJIXoBxHpEF8UW6VieTnNz3EHej6gQIDAQAB",
+  "update_url": "https://clients2.google.com/service/update2/crx",
   "browser_specific_settings": {
     "gecko": {
       "id": "scribd-pdf-downloader@sbp359.github.io",
@@ -19,38 +30,29 @@
       }
     }
   },
-  "content_scripts": [
-    {
-      "js": [
-        "constants.js",
-        "content.js"
-      ],
-      "matches": [
-        "https://*.scribd.com/document/*",
-        "https://*.scribd.com/doc/*",
-        "https://*.scribd.com/embeds/*",
-        "https://*.scribd.com/embed/*"
-      ],
-      "run_at": "document_end"
-    }
-  ],
-  "description": "Prepare Scribd documents you can access for saving as PDFs.",
-  "host_permissions": [
-    "https://*.scribd.com/*"
-  ],
-  "icons": {
-    "128": "icons/icon128.png",
-    "16": "icons/icon16.png",
-    "48": "icons/icon48.png"
-  },
-  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApsmx024bKFU08Y/ZcbVbP22OPLQ47IPwpxjamgOneCcl2kbdJ77K1+FFpeP6JP2L5o0QP5ZOmge1OZx/GsSzELeOCGI9tAOYR+h+rSFOwiPIbCy9IhqZBb30OQ705y+8GClGnrzutpq12GArnwfDm6CbQqqrowsqWqMkMt38SIqoW35DZ5M/0BmDEi2G/1SPwjl3R/w4MD0rSlZyXzweLtu9bda6S9UdwW3Dkytltw2JlkaINg7SKHwqvvo0n8kcE2KaMT/JR8731WXw8VRhWcqE6bC/+fsP2mUHmz453jvZIGdreXuXVucszJIXoBxHpEF8UW6VieTnNz3EHej6gQIDAQAB",
-  "manifest_version": 3,
-  "name": "Scribd Downloader",
   "permissions": [
     "activeTab",
     "tabs",
     "scripting"
   ],
-  "update_url": "https://clients2.google.com/service/update2/crx",
-  "version": "1.0.2"
+  "host_permissions": [
+    "https://*.scribd.com/*",
+    "https://*.slideshare.net/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.scribd.com/document/*",
+        "https://*.scribd.com/doc/*",
+        "https://*.scribd.com/embeds/*",
+        "https://*.scribd.com/embed/*",
+        "https://*.slideshare.net/*"
+      ],
+      "js": [
+        "constants.js",
+        "content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
 }

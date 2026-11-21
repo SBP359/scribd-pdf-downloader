@@ -1,17 +1,19 @@
 /**
  * ===================================================
- * Scribd Downloader - Global Constants & Configuration
+ * Scribd & SlideShare Downloader - Global Constants
  * ===================================================
  * Shared configuration and document processing settings
  */
 
 const APP_CONFIG = {
   // 0. Extension Version
-  VERSION: "1.0.2",
+  VERSION: "1.1.0",
 
   // 1. Download processing
-  DEFAULT_SCROLL_DELAY_MS: 150,   // Default delay between page scrolls (ms)
-  RENDER_WAIT_MS: 2000,          // Wait for fonts and SVG layouts before printing (ms)
+  DEFAULT_SCROLL_DELAY_MS: 150,         // Default delay between page/slide scrolls (ms)
+  RENDER_WAIT_MS: 2000,                 // Wait for fonts and SVG layouts before printing (ms)
+  SLIDESHARE_IMAGE_LOAD_TIMEOUT_MS: 12000, // Per-candidate HD image timeout on SlideShare (ms)
+  SLIDESHARE_LOAD_CONCURRENCY: 6,       // Concurrent HD slide image preloads on SlideShare
 
   // 2. Project links
   PROJECT_URL: "https://github.com/sbp359/scribd-pdf-downloader",
