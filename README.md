@@ -17,9 +17,6 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/sbp359/scribd-pdf-downloader/releases">
-    <img alt="GitHub release" src="https://img.shields.io/github/v/release/sbp359/scribd-pdf-downloader?style=for-the-badge">
-  </a>
   <a href="LICENSE">
     <img alt="MIT License" src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge">
   </a>
